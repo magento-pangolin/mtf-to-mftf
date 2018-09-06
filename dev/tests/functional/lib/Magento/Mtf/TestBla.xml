@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ /**
+  * Copyright © Magento, Inc. All rights reserved.
+  * See COPYING.txt for license details.
+  */
+-->
+
+<tests xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
+    <test name="%%TestName%%">
+        <annotations>
+            <features value="%%TestFeature%%"/>
+            <title value="%%TestTitle%%"/>
+            <description value="%%TestDescription%%"/>
+            <severity value="CRITICAL"/>
+            <group value="mtf_migrated"/>
+        </annotations>
+
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber0" />
+        <amOnPage url="http://magento2.vagrant74/admin/admin/auth/login" stepKey="stepNumber1"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber2" />
+        <fillField selector="//*[@id = 'login-form']//*[@id = 'username']" userInput="admin" stepKey="stepNumber3"/>
+        <fillField selector="//*[@id = 'login-form']//*[@id = 'login']" userInput="123123q" stepKey="stepNumber4"/>
+        <click selector="//*[@id = 'login-form']//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' action-login ')]" stepKey="stepNumber5"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber6" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber7"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' add-tax-rate ')]" stepKey="stepNumber8"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'code']" userInput="TaxIdentifier504304391" stepKey="stepNumber9"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'tax_postcode']" userInput="*" stepKey="stepNumber10"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[contains(normalize-space(.), "Australia")]" stepKey="stepNumber11"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'rate']" userInput="20" stepKey="stepNumber12"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber13" />
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber14"/>
+        <waitForPageLoad stepKey="stepNumber15" />
+        <seeElement selector="//ancestor::body/div[@data-role="loader"]" stepKey="stepNumber16" />
+        <seeElement selector="//ancestor::body/div[@id="loading-mask"]" stepKey="stepNumber17" />
+        <seeElement selector="//*[@data-ui-id and substring(@data-ui-id, string-length(@data-ui-id)-14) = 'message-success']" stepKey="stepNumber18" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber19" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber20"/>
+        <waitForPageLoad stepKey="stepNumber21" />
+        <waitForPageLoad stepKey="stepNumber22" />
+        <waitForPageLoad stepKey="stepNumber23" />
+        <waitForPageLoad stepKey="stepNumber24" />
+        <waitForPageLoad stepKey="stepNumber25" />
+        <waitForPageLoad stepKey="stepNumber26" />
+        <waitForPageLoad stepKey="stepNumber27" />
+        <waitForPageLoad stepKey="stepNumber28" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber29"/>
+        <waitForPageLoad stepKey="stepNumber30" />
+        <waitForPageLoad stepKey="stepNumber31" />
+        <waitForPageLoad stepKey="stepNumber32" />
+        <waitForPageLoad stepKey="stepNumber33" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier504304391" stepKey="stepNumber34"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_tax_country_id']//option[contains(normalize-space(.), "Australia")]" stepKey="stepNumber35"/>
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_tax_postcode']" userInput="*" stepKey="stepNumber36"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber37"/>
+        <waitForPageLoad stepKey="stepNumber38" />
+        <waitForPageLoad stepKey="stepNumber39" />
+        <waitForPageLoad stepKey="stepNumber40" />
+        <waitForPageLoad stepKey="stepNumber41" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier504304391"]] and td[text()[normalize-space()="Australia"]] and td[text()[normalize-space()="*"]]]" stepKey="stepNumber42" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber43" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber44"/>
+        <waitForPageLoad stepKey="stepNumber45" />
+        <waitForPageLoad stepKey="stepNumber46" />
+        <waitForPageLoad stepKey="stepNumber47" />
+        <waitForPageLoad stepKey="stepNumber48" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber49"/>
+        <waitForPageLoad stepKey="stepNumber50" />
+        <waitForPageLoad stepKey="stepNumber51" />
+        <waitForPageLoad stepKey="stepNumber52" />
+        <waitForPageLoad stepKey="stepNumber53" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier504304391" stepKey="stepNumber54"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber55"/>
+        <waitForPageLoad stepKey="stepNumber56" />
+        <waitForPageLoad stepKey="stepNumber57" />
+        <waitForPageLoad stepKey="stepNumber58" />
+        <waitForPageLoad stepKey="stepNumber59" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier504304391"]]]" stepKey="stepNumber60" />
+        <click selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier504304391"]]]//td[@class and contains(@class, 'col-code')]" stepKey="stepNumber61"/>
+        <waitForPageLoad stepKey="stepNumber62" />
+        <waitForPageLoad stepKey="stepNumber63" />
+        <waitForPageLoad stepKey="stepNumber64" />
+        <waitForPageLoad stepKey="stepNumber65" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber66" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber67" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rule/index" stepKey="stepNumber68"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@id = 'add']" stepKey="stepNumber69"/>
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber70" />
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber71" />
+        <seeElement selector="//*[@id = 'edit_form']//*[@class and contains(@class, 'tax_rate')]//*[contains(@class,"mselect-list-item")]/label[contains(normalize-space(.), "TaxIdentifier504304391")]" stepKey="stepNumber72" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber73" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber74"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' add-tax-rate ')]" stepKey="stepNumber75"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'code']" userInput="TaxIdentifier1201268670" stepKey="stepNumber76"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'zip_is_range']" stepKey="stepNumber77"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'zip_from']" userInput="90001" stepKey="stepNumber78"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'zip_to']" userInput="96162" stepKey="stepNumber79"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[contains(normalize-space(.), "United States")]" stepKey="stepNumber80"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_region_id']//option[contains(normalize-space(.), "California")]" stepKey="stepNumber81"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'rate']" userInput="15.5" stepKey="stepNumber82"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber83" />
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber84"/>
+        <waitForPageLoad stepKey="stepNumber85" />
+        <seeElement selector="//ancestor::body/div[@data-role="loader"]" stepKey="stepNumber86" />
+        <seeElement selector="//ancestor::body/div[@id="loading-mask"]" stepKey="stepNumber87" />
+        <seeElement selector="//*[@data-ui-id and substring(@data-ui-id, string-length(@data-ui-id)-14) = 'message-success']" stepKey="stepNumber88" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber89" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber90"/>
+        <waitForPageLoad stepKey="stepNumber91" />
+        <waitForPageLoad stepKey="stepNumber92" />
+        <waitForPageLoad stepKey="stepNumber93" />
+        <waitForPageLoad stepKey="stepNumber94" />
+        <waitForPageLoad stepKey="stepNumber95" />
+        <waitForPageLoad stepKey="stepNumber96" />
+        <waitForPageLoad stepKey="stepNumber97" />
+        <waitForPageLoad stepKey="stepNumber98" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber99"/>
+        <waitForPageLoad stepKey="stepNumber100" />
+        <waitForPageLoad stepKey="stepNumber101" />
+        <waitForPageLoad stepKey="stepNumber102" />
+        <waitForPageLoad stepKey="stepNumber103" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier1201268670" stepKey="stepNumber104"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_tax_country_id']//option[contains(normalize-space(.), "United States")]" stepKey="stepNumber105"/>
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_tax_postcode']" userInput="90001-96162" stepKey="stepNumber106"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber107"/>
+        <waitForPageLoad stepKey="stepNumber108" />
+        <waitForPageLoad stepKey="stepNumber109" />
+        <waitForPageLoad stepKey="stepNumber110" />
+        <waitForPageLoad stepKey="stepNumber111" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier1201268670"]] and td[text()[normalize-space()="United States"]] and td[text()[normalize-space()="90001-96162"]]]" stepKey="stepNumber112" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber113" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber114"/>
+        <waitForPageLoad stepKey="stepNumber115" />
+        <waitForPageLoad stepKey="stepNumber116" />
+        <waitForPageLoad stepKey="stepNumber117" />
+        <waitForPageLoad stepKey="stepNumber118" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber119"/>
+        <waitForPageLoad stepKey="stepNumber120" />
+        <waitForPageLoad stepKey="stepNumber121" />
+        <waitForPageLoad stepKey="stepNumber122" />
+        <waitForPageLoad stepKey="stepNumber123" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier1201268670" stepKey="stepNumber124"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber125"/>
+        <waitForPageLoad stepKey="stepNumber126" />
+        <waitForPageLoad stepKey="stepNumber127" />
+        <waitForPageLoad stepKey="stepNumber128" />
+        <waitForPageLoad stepKey="stepNumber129" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier1201268670"]]]" stepKey="stepNumber130" />
+        <click selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier1201268670"]]]//td[@class and contains(@class, 'col-code')]" stepKey="stepNumber131"/>
+        <waitForPageLoad stepKey="stepNumber132" />
+        <waitForPageLoad stepKey="stepNumber133" />
+        <waitForPageLoad stepKey="stepNumber134" />
+        <waitForPageLoad stepKey="stepNumber135" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber136" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_region_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber137" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber138" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rule/index" stepKey="stepNumber139"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@id = 'add']" stepKey="stepNumber140"/>
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber141" />
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber142" />
+        <seeElement selector="//*[@id = 'edit_form']//*[@class and contains(@class, 'tax_rate')]//*[contains(@class,"mselect-list-item")]/label[contains(normalize-space(.), "TaxIdentifier1201268670")]" stepKey="stepNumber143" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber144" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber145"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' add-tax-rate ')]" stepKey="stepNumber146"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'code']" userInput="TaxIdentifier377444906" stepKey="stepNumber147"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'tax_postcode']" userInput="180" stepKey="stepNumber148"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[contains(normalize-space(.), "Canada")]" stepKey="stepNumber149"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_region_id']//option[contains(normalize-space(.), "*")]" stepKey="stepNumber150"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'rate']" userInput="25" stepKey="stepNumber151"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber152" />
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber153"/>
+        <waitForPageLoad stepKey="stepNumber154" />
+        <seeElement selector="//ancestor::body/div[@data-role="loader"]" stepKey="stepNumber155" />
+        <seeElement selector="//ancestor::body/div[@id="loading-mask"]" stepKey="stepNumber156" />
+        <seeElement selector="//*[@data-ui-id and substring(@data-ui-id, string-length(@data-ui-id)-14) = 'message-success']" stepKey="stepNumber157" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber158" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber159"/>
+        <waitForPageLoad stepKey="stepNumber160" />
+        <waitForPageLoad stepKey="stepNumber161" />
+        <waitForPageLoad stepKey="stepNumber162" />
+        <waitForPageLoad stepKey="stepNumber163" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber164"/>
+        <waitForPageLoad stepKey="stepNumber165" />
+        <waitForPageLoad stepKey="stepNumber166" />
+        <waitForPageLoad stepKey="stepNumber167" />
+        <waitForPageLoad stepKey="stepNumber168" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier377444906" stepKey="stepNumber169"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber170"/>
+        <waitForPageLoad stepKey="stepNumber171" />
+        <waitForPageLoad stepKey="stepNumber172" />
+        <waitForPageLoad stepKey="stepNumber173" />
+        <waitForPageLoad stepKey="stepNumber174" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier377444906"]]]" stepKey="stepNumber175" />
+        <click selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier377444906"]]]//td[@class and contains(@class, 'col-code')]" stepKey="stepNumber176"/>
+        <waitForPageLoad stepKey="stepNumber177" />
+        <waitForPageLoad stepKey="stepNumber178" />
+        <waitForPageLoad stepKey="stepNumber179" />
+        <waitForPageLoad stepKey="stepNumber180" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber181" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_region_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber182" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber183" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rule/index" stepKey="stepNumber184"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@id = 'add']" stepKey="stepNumber185"/>
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber186" />
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber187" />
+        <seeElement selector="//*[@id = 'edit_form']//*[@class and contains(@class, 'tax_rate')]//*[contains(@class,"mselect-list-item")]/label[contains(normalize-space(.), "TaxIdentifier377444906")]" stepKey="stepNumber188" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber189" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber190"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' add-tax-rate ')]" stepKey="stepNumber191"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'code']" userInput="TaxIdentifier2071890438" stepKey="stepNumber192"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'zip_is_range']" stepKey="stepNumber193"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'zip_from']" userInput="1" stepKey="stepNumber194"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'zip_to']" userInput="7800935" stepKey="stepNumber195"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[contains(normalize-space(.), "United Kingdom")]" stepKey="stepNumber196"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'rate']" userInput="7.75" stepKey="stepNumber197"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber198" />
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber199"/>
+        <waitForPageLoad stepKey="stepNumber200" />
+        <seeElement selector="//ancestor::body/div[@data-role="loader"]" stepKey="stepNumber201" />
+        <seeElement selector="//ancestor::body/div[@id="loading-mask"]" stepKey="stepNumber202" />
+        <seeElement selector="//*[@data-ui-id and substring(@data-ui-id, string-length(@data-ui-id)-14) = 'message-success']" stepKey="stepNumber203" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber204" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber205"/>
+        <waitForPageLoad stepKey="stepNumber206" />
+        <waitForPageLoad stepKey="stepNumber207" />
+        <waitForPageLoad stepKey="stepNumber208" />
+        <waitForPageLoad stepKey="stepNumber209" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber210"/>
+        <waitForPageLoad stepKey="stepNumber211" />
+        <waitForPageLoad stepKey="stepNumber212" />
+        <waitForPageLoad stepKey="stepNumber213" />
+        <waitForPageLoad stepKey="stepNumber214" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier2071890438" stepKey="stepNumber215"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber216"/>
+        <waitForPageLoad stepKey="stepNumber217" />
+        <waitForPageLoad stepKey="stepNumber218" />
+        <waitForPageLoad stepKey="stepNumber219" />
+        <waitForPageLoad stepKey="stepNumber220" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier2071890438"]]]" stepKey="stepNumber221" />
+        <click selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier2071890438"]]]//td[@class and contains(@class, 'col-code')]" stepKey="stepNumber222"/>
+        <waitForPageLoad stepKey="stepNumber223" />
+        <waitForPageLoad stepKey="stepNumber224" />
+        <waitForPageLoad stepKey="stepNumber225" />
+        <waitForPageLoad stepKey="stepNumber226" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber227" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber228" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rule/index" stepKey="stepNumber229"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@id = 'add']" stepKey="stepNumber230"/>
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber231" />
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber232" />
+        <seeElement selector="//*[@id = 'edit_form']//*[@class and contains(@class, 'tax_rate')]//*[contains(@class,"mselect-list-item")]/label[contains(normalize-space(.), "TaxIdentifier2071890438")]" stepKey="stepNumber233" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber234" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber235"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' add-tax-rate ')]" stepKey="stepNumber236"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'code']" userInput="TaxIdentifier1024531348" stepKey="stepNumber237"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'tax_postcode']" userInput="*" stepKey="stepNumber238"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[contains(normalize-space(.), "France")]" stepKey="stepNumber239"/>
+        <click selector="//*[@id = 'rate-form']//*[@name = 'tax_region_id']//option[contains(normalize-space(.), "Val-d'Oise")]" stepKey="stepNumber240"/>
+        <fillField selector="//*[@id = 'rate-form']//*[@name = 'rate']" userInput="999" stepKey="stepNumber241"/>
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber242" />
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' save-rate ')]" stepKey="stepNumber243"/>
+        <waitForPageLoad stepKey="stepNumber244" />
+        <seeElement selector="//ancestor::body/div[@data-role="loader"]" stepKey="stepNumber245" />
+        <seeElement selector="//ancestor::body/div[@id="loading-mask"]" stepKey="stepNumber246" />
+        <seeElement selector="//*[@data-ui-id and substring(@data-ui-id, string-length(@data-ui-id)-14) = 'message-success']" stepKey="stepNumber247" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber248" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber249"/>
+        <waitForPageLoad stepKey="stepNumber250" />
+        <waitForPageLoad stepKey="stepNumber251" />
+        <waitForPageLoad stepKey="stepNumber252" />
+        <waitForPageLoad stepKey="stepNumber253" />
+        <waitForPageLoad stepKey="stepNumber254" />
+        <waitForPageLoad stepKey="stepNumber255" />
+        <waitForPageLoad stepKey="stepNumber256" />
+        <waitForPageLoad stepKey="stepNumber257" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber258"/>
+        <waitForPageLoad stepKey="stepNumber259" />
+        <waitForPageLoad stepKey="stepNumber260" />
+        <waitForPageLoad stepKey="stepNumber261" />
+        <waitForPageLoad stepKey="stepNumber262" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier1024531348" stepKey="stepNumber263"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_tax_country_id']//option[contains(normalize-space(.), "France")]" stepKey="stepNumber264"/>
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_tax_postcode']" userInput="*" stepKey="stepNumber265"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber266"/>
+        <waitForPageLoad stepKey="stepNumber267" />
+        <waitForPageLoad stepKey="stepNumber268" />
+        <waitForPageLoad stepKey="stepNumber269" />
+        <waitForPageLoad stepKey="stepNumber270" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier1024531348"]] and td[text()[normalize-space()="France"]] and td[text()[normalize-space()="*"]]]" stepKey="stepNumber271" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber272" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rate/index" stepKey="stepNumber273"/>
+        <waitForPageLoad stepKey="stepNumber274" />
+        <waitForPageLoad stepKey="stepNumber275" />
+        <waitForPageLoad stepKey="stepNumber276" />
+        <waitForPageLoad stepKey="stepNumber277" />
+        <conditionalClick selector="{{AdminDataGridHeaderSection.clearFilters}}" dependentSelector="{{AdminDataGridHeaderSection.clearFilters}}" visible="true" stepKey="stepNumber278"/>
+        <waitForPageLoad stepKey="stepNumber279" />
+        <waitForPageLoad stepKey="stepNumber280" />
+        <waitForPageLoad stepKey="stepNumber281" />
+        <waitForPageLoad stepKey="stepNumber282" />
+        <fillField selector="//*[@id = 'tax_rate_grid']//*[@id = 'tax_rate_grid_filter_code']" userInput="TaxIdentifier1024531348" stepKey="stepNumber283"/>
+        <click selector="//*[@id = 'tax_rate_grid']//*[@data-action = 'grid-filter-apply']" stepKey="stepNumber284"/>
+        <waitForPageLoad stepKey="stepNumber285" />
+        <waitForPageLoad stepKey="stepNumber286" />
+        <waitForPageLoad stepKey="stepNumber287" />
+        <waitForPageLoad stepKey="stepNumber288" />
+        <seeElement selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier1024531348"]]]" stepKey="stepNumber289" />
+        <click selector="//*[@id = 'tax_rate_grid']//tbody/tr[td[text()[normalize-space()="TaxIdentifier1024531348"]]]//td[@class and contains(@class, 'col-code')]" stepKey="stepNumber290"/>
+        <waitForPageLoad stepKey="stepNumber291" />
+        <waitForPageLoad stepKey="stepNumber292" />
+        <waitForPageLoad stepKey="stepNumber293" />
+        <waitForPageLoad stepKey="stepNumber294" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_country_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber295" />
+        <seeElement selector="//*[@id = 'rate-form']//*[@name = 'tax_region_id']//option[(@checked and (name(.) = 'input' or name(.) = 'command')and (@type = 'checkbox' or @type = 'radio'))]" stepKey="stepNumber296" />
+        <seeElement selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-header ')]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' admin-user ')]" stepKey="stepNumber297" />
+        <amOnPage url="http://magento2.vagrant74/admin/tax/rule/index" stepKey="stepNumber298"/>
+        <click selector="//*[@class and contains(concat(' ', normalize-space(@class), ' '), ' page-main-actions ')]//*[@id = 'add']" stepKey="stepNumber299"/>
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber300" />
+        <seeElement selector="//*[@class and contains(@class, 'tax_rate')]/descendant-or-self::*/*[(@class and contains(concat(' ', normalize-space(@class), ' '), ' block ')) and (@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-list '))]/descendant-or-self::*/*[@class and contains(concat(' ', normalize-space(@class), ' '), ' mselect-items-wrapper ')]" stepKey="stepNumber301" />
+        <seeElement selector="//*[@id = 'edit_form']//*[@class and contains(@class, 'tax_rate')]//*[contains(@class,"mselect-list-item")]/label[contains(normalize-space(.), "TaxIdentifier1024531348")]" stepKey="stepNumber302" />
+
+    </test>
+</tests>

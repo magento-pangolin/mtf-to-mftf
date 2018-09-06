@@ -26,6 +26,7 @@
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductPage" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductInCart" />
         </variation>
+        <!--
         <variation name="CreateSimpleProductEntityTestVariation2">
             <data name="description" xsi:type="string">Create product with custom options(percent price)</data>
             <data name="product/data/url_key" xsi:type="string">simple-product-%isolation%</data>
@@ -253,5 +254,6 @@
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductSaveMessage" />
             <constraint name="Magento\Catalog\Test\Constraint\AssertProductViewBreadcrumbsCategory" />
         </variation>
+        -->
     </testCase>
 </config>

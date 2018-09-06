@@ -10,6 +10,8 @@
     <preference for="Magento\Mtf\Util\Command\File\ExportInterface" type="Magento\Mtf\Util\Command\File\Export" />
     <preference for="Magento\Mtf\Util\Command\File\Export\ReaderInterface" type="Magento\Mtf\Util\Command\File\Export\Reader" />
 
+    <preference for="Magento\Mtf\Client\DriverInterface" type="Magento\Mtf\Driver" />
+
     <type name="Magento\Mtf\Util\Command\File\Export" shared="false" />
 
     <virtualType name="Magento\Mtf\Config\SchemaLocator\Config" type="Magento\Mtf\Config\SchemaLocator">
