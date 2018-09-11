@@ -19,7 +19,7 @@ class Driver extends \Magento\Mtf\Client\Driver\Selenium\Driver
     /**
      * @var \Magento\Mtf\MftfGenerator
      */
-    private $MFTF_TEST_GENERATOR;
+    public $MFTF_TEST_GENERATOR;
 
     /**
      * Initial web driver.
@@ -29,7 +29,7 @@ class Driver extends \Magento\Mtf\Client\Driver\Selenium\Driver
     protected function init()
     {
         parent::init();
-        $this->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator("Test");
+        $this->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator("__DRIVER_INIT__");
     }
 
     /**
@@ -545,6 +545,6 @@ class Driver extends \Magento\Mtf\Client\Driver\Selenium\Driver
 
     public function __destruct()
     {
-        $this->MFTF_TEST_GENERATOR->generateTest();
+//        $this->MFTF_TEST_GENERATOR->generateTest();
     }
 }
