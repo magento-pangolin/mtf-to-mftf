@@ -10,9 +10,10 @@
        xsi:noNamespaceSchemaLocation="../../../../vendor/magento/magento2-functional-testing-framework/src/Magento/FunctionalTestingFramework/Test/etc/testSchema.xsd">
     <test name="%%TestName%%">
         <annotations>
-            <features value="%%TestFeature%%"/>
+            <features value="%%TestFeatures%%"/>
             <title value="%%TestTitle%%"/>
             <description value="%%TestDescription%%"/>
+            <testCaseId value="%%TestCaseId%%"/>
             <severity value="CRITICAL"/>
             <group value="mtf_migrated"/>
         </annotations>

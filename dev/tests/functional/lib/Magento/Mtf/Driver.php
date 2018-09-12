@@ -29,7 +29,8 @@ class Driver extends \Magento\Mtf\Client\Driver\Selenium\Driver
     protected function init()
     {
         parent::init();
-        $this->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator("__DRIVER_INIT__");
+        // reeceTodo: why do I have to instantiate this here?
+        $this->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator();
     }
 
     /**
