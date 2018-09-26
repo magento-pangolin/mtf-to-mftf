@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../etc/di.xsd">
+    <preference for="Magento\Mtf\Test\Handler\TestInterface" type="Magento\Mtf\Test\Handler\Test\Ui" />
+</config>

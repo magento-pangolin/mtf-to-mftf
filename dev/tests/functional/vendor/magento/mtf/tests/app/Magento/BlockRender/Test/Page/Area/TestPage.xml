@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../../etc/pages.xsd">
+    <page mca="/" module="Magento_BlockRender" name="TestPage" area="Area">
+        <block name="blockRender" class="Magento\BlockRender\Test\Block\BlockRender" locator="body" strategy="tag name">
+            <render name="test" class="Magento\Mtf\Test\Block\TestBlock" locator="#viewport" strategy="css selector" />
+            <render name="render" class="Magento\BlockRender\Test\Block\BlockRenderForm" locator="#viewport" strategy="css selector" />
+        </block>
+    </page>
+</config>

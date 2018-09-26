@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!--
+/**
+ * Copyright © 2017 Magento. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../../../Magento/Mtf/Repository/etc/repository.xsd">
+    <repository class="Magento\Mtf\Test\Repository\Test">
+        <dataset name="default">
+            <field name="locator" xsi:type="string">[href*=about]</field>
+            <field name="strategy" xsi:type="string">css selector</field>
+            <field name="search" xsi:type="string">Some text</field>
+        </dataset>
+    </repository>
+</config>
