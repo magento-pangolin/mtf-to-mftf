@@ -3,7 +3,6 @@
 /etc/config.xml
 /generated
 /lib/Magento/Mtf/Util/Generate/testcase.xml
-/vendor
 phpunit.xml
 credentials.xml
 .htaccess
