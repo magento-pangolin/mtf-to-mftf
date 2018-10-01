@@ -32,6 +32,47 @@ class AssertTaxRateSuccessSaveMessage extends AbstractConstraint
             . "\nExpected: " . self::SUCCESS_MESSAGE
             . "\nActual: " . $actualMessage
         );
+
+        // todo: remove below later... but I will test all asserts here
+
+        \PHPUnit\Framework\Assert::assertArrayHasKey(
+            "cat",
+            ["dog" => 1, "horse" => false, "cat" => "success"],
+            '3D Secure information is not present.'
+        );
+
+        \PHPUnit\Framework\Assert::assertArrayNotHasKey(
+            "cat",
+            ["dog" => 1, "horse" => false],
+            'Product page must be without swatch attribute options'
+        );
+
+        \PHPUnit\Framework\Assert::assertContains(
+            "cat",
+            "dogdogDOGdogcatdogdogDOGdog",
+            'Wrong content is displayed.'
+        );
+
+        \PHPUnit\Framework\Assert::assertCount(
+            3,
+            ["one", "two", "three"],
+            'Incorrect count'
+        );
+
+        \PHPUnit\Framework\Assert::assertEmpty(
+            array(),
+            'Array is not empty'
+        );
+
+        \PHPUnit\Framework\Assert::assertFalse(
+            1 == 2,
+            'Some error message here'
+        );
+
+        \PHPUnit\Framework\Assert::assertTrue(
+            1 == 1,
+            'Some error message here'
+        );
     }
 
     /**

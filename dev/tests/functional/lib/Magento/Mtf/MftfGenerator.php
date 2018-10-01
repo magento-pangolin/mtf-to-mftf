@@ -29,6 +29,11 @@ class MftfGenerator
         $this->stepCounter += 1;
     }
 
+    public function addReviewAssertComment()
+    {
+        $this->testActions[] = "<!-- ASSERT MUST BE REVIEWED MANUALLY -->";
+    }
+
     public function generateTest()
     {
         $actions = implode(PHP_EOL . '        ' , $this->testActions);

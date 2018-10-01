@@ -67,6 +67,12 @@ use Traversable;
 /**
  * A set of assertion methods.
  */
+
+// todo
+// Alex says to include a comment <!-- assert MUST be reviewed manually -->
+// manual step to make use of earlier grabs
+// later we will try to figure out how to connect them together
+// expected can be hard coded
 abstract class Assert
 {
     /**
@@ -98,6 +104,14 @@ abstract class Assert
         }
 
         $constraint = new ArrayHasKey($key);
+
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertArrayHasKey message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $key . '</expectedResult>');
+        // todo something other than json_encode()
+        $generator->addAction('    <actualResult type="array">' . json_encode($array) . '</actualResult>');
+        $generator->addAction("</assertArrayHasKey>");
 
         static::assertThat($array, $constraint, $message);
     }
@@ -158,6 +172,14 @@ abstract class Assert
             new ArrayHasKey($key)
         );
 
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertArrayNotHasKey message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $key . '</expectedResult>');
+        // todo something other than json_encode()
+        $generator->addAction('    <actualResult type="array">' . json_encode($array) . '</actualResult>');
+        $generator->addAction("</assertArrayNotHasKey>");
+
         static::assertThat($array, $constraint, $message);
     }
 
@@ -198,6 +220,13 @@ abstract class Assert
                 'array, traversable or string'
             );
         }
+
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertContains message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $needle . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $haystack . '</actualResult>');
+        $generator->addAction("</assertContains>");
 
         static::assertThat($haystack, $constraint, $message);
     }
@@ -448,6 +477,13 @@ abstract class Assert
             throw InvalidArgumentHelper::factory(2, 'countable or traversable');
         }
 
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertCount message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="int">' . $expectedCount . '</expectedResult>');
+        $generator->addAction('    <actualResult type="array">' . json_encode($haystack) . '</actualResult>');
+        $generator->addAction("</assertCount>");
+
         static::assertThat(
             $haystack,
             new Count($expectedCount),
@@ -538,13 +574,12 @@ abstract class Assert
             $ignoreCase
         );
 
-        $foo = \Magento\Mtf\ObjectManager::getInstance();
-
-        // convert to <assertEquals>
-        // Alex says to include a comment <!-- assert MUST be reviewed manually -->
-        // manual step to make use of earlier grabs
-        // later we will try to figure out how to connect them together
-        // expected can be hard coded
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertEquals message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $expected . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $actual . '</actualResult>');
+        $generator->addAction("</assertEquals>");
 
         static::assertThat($actual, $constraint, $message);
     }
@@ -635,6 +670,13 @@ abstract class Assert
      */
     public static function assertEmpty($actual, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertEmpty message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        // todo: something other than json_encode
+        $generator->addAction('    <actualResult type="array">' . json_encode($actual) . '</actualResult>');
+        $generator->addAction("</assertEmpty>");
+
         static::assertThat($actual, static::isEmpty(), $message);
     }
 
@@ -1155,6 +1197,13 @@ abstract class Assert
      */
     public static function assertTrue($condition, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertTrue message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        // todo better output of $condition in XML
+        $generator->addAction('    <actualResult type="bool">' . ($condition ? 'true' : 'false') . '</actualResult>');
+        $generator->addAction("</assertTrue>");
+
         static::assertThat($condition, static::isTrue(), $message);
     }
 
@@ -1181,6 +1230,13 @@ abstract class Assert
      */
     public static function assertFalse($condition, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertFalse message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        // todo better output of $condition in XML
+        $generator->addAction('    <actualResult type="bool">' . ($condition ? 'true' : 'false') . '</actualResult>');
+        $generator->addAction("</assertFalse>");
+
         static::assertThat($condition, static::isFalse(), $message);
     }
 
