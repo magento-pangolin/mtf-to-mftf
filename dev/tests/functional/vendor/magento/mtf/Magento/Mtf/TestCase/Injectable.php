@@ -120,6 +120,16 @@ abstract class Injectable extends Functional
         return $this->variationName;
     }
 
+    function endsWith($haystack, $needle)
+    {
+        $length = strlen($needle);
+        if ($length == 0) {
+            return true;
+        }
+
+        return (substr($haystack, -$length) === $needle);
+    }
+
     /**
      * Run with Variations Iterator.
      *
@@ -166,6 +176,9 @@ abstract class Injectable extends Functional
 
 
 
+
+
+
                 // GATHER SOME DATA
                 $variationName = explode("_", $this->getVariationName())[0];
                 list($_, $moduleName) = explode("\\", $this->dataId);
@@ -173,13 +186,13 @@ abstract class Injectable extends Functional
                 $truncatedDataId = str_replace("::test", "", $this->dataId);
                 $truncatedDataId = str_replace("::", "", $truncatedDataId);
                 $testCaseData = $data->get('testCase')[$truncatedDataId];
-                $variationData = $testCaseData["variation"][$variationName];
-                $title = $variationData["summary"] ?? $testCaseData["summary"] ?? "";
-                $testCaseId = $variationData["ticketId"] ?? $testCaseData["ticketId"] ?? "";
+//                $variationData = $testCaseData["variation"][$variationName];
+//                $title = $variationData["summary"] ?? $testCaseData["summary"] ?? "";
+//                $testCaseId = $variationData["ticketId"] ?? $testCaseData["ticketId"] ?? "";
 
                 // new MftfTestGenerator is instantiated per variation
                 $driver = $this->getObjectManager()->get('Magento\Mtf\Driver');
-                $driver->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator($variationName, $moduleName, $title, $testCaseId);
+//                $driver->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator($variationName, $moduleName, $title, $testCaseId);
 
 // commented out to make room for CSV output instead
 //                $this->executeTestVariation($result, $variation);
@@ -187,11 +200,132 @@ abstract class Injectable extends Functional
 //                // Generate after test run to dump the resulting xml to the filesystem
 //                $driver->MFTF_TEST_GENERATOR->generateTest();
 
+                $moduleToPriorityMap = [
+                    "AdvancedCheckout" => "P1",
+                    "AdvancedPricingImportExport" => "P1",
+                    "Analytics" => "P1",
+                    "Authorizenet" => "P1",
+                    "Braintree" => "P1",
+                    "Catalog" => "P1",
+                    "CatalogImportExport" => "P1",
+                    "CatalogRule" => "P1",
+                    "CatalogRuleConfigurable" => "P1",
+                    "CatalogSearch" => "P1",
+                    "CatalogStaging" => "P1",
+                    "CatalogUrlRewrite" => "P1",
+                    "Checkout" => "P1",
+                    "Cms" => "P1",
+                    "Company" => "P1",
+                    "CompanyCredit" => "P1",
+                    "Config" => "P1",
+                    "ConfigurableProduct" => "P1",
+                    "Customer" => "P1",
+                    "Cybersource" => "P1",
+                    "Eway" => "P1",
+                    "ImportExport" => "P1",
+                    "Indexer" => "P1",
+                    "LayeredNavigation" => "P1",
+                    "NegotiableQuote" => "P1",
+                    "NegotiableQuoteSharedCatalog" => "P1",
+                    "PageCache" => "P1",
+                    "Payment" => "P1",
+                    "Paypal" => "P1",
+                    "QuickOrder" => "P1",
+                    "Sales" => "P1",
+                    "SalesRule" => "P1",
+                    "Search" => "P1",
+                    "Security" => "P1",
+                    "Setup" => "P1",
+                    "SharedCatalog" => "P1",
+                    "Shipping" => "P1",
+                    "Store" => "P1",
+                    "Swatches" => "P1",
+                    "TargetRule" => "P1",
+                    "Tax" => "P1",
+                    "Ui" => "P1",
+                    "UrlRewrite" => "P1",
+                    "VisualMerchandiser" => "P1",
+                    "Worldpay" => "P1",
+                    "Backend" => "P2",
+                    "Banner" => "P2",
+                    "Bundle" => "P2",
+                    "Captcha" => "P2",
+                    "CatalogPermissions" => "P2",
+                    "CompanyPayment" => "P2",
+                    "CurrencySymbol" => "P2",
+                    "CustomerBalance" => "P2",
+                    "CustomerCustomAttributes" => "P2",
+                    "CustomerFinance" => "P2",
+                    "CustomerImportExport" => "P2",
+                    "CustomerSegment" => "P2",
+                    "Email" => "P2",
+                    "GiftWrapping" => "P2",
+                    "GoogleTagManager" => "P2",
+                    "GroupedProduct" => "P2",
+                    "Integration" => "P2",
+                    "Logging" => "P2",
+                    "Persistent" => "P2",
+                    "ProductVideo" => "P2",
+                    "Reports" => "P2",
+                    "RequisitionList" => "P2",
+                    "Review" => "P2",
+                    "Reward" => "P2",
+                    "Rma" => "P2",
+                    "SampleData" => "P2",
+                    "Signifyd" => "P2",
+                    "Sitemap" => "P2",
+                    "Support" => "P2",
+                    "User" => "P2",
+                    "Vault" => "P2",
+                    "VersionsCms" => "P2",
+                    "Weee" => "P2",
+                    "Widget" => "P2",
+                    "Wishlist" => "P2",
+                    "CatalogEvent" => "P3",
+                    "CheckoutAgreements" => "P3",
+                    "Directory" => "P3",
+                    "Downloadable" => "P3",
+                    "GiftCard" => "P3",
+                    "GiftCardAccount" => "P3",
+                    "GiftMessage" => "P3",
+                    "GiftRegistry" => "P3",
+                    "Invitation" => "P3",
+                    "Msrp" => "P3",
+                    "MultipleWishlist" => "P3",
+                    "Newsletter" => "P3",
+                    "Reminder" => "P3",
+                    "SalesArchive" => "P3",
+                    "Swagger" => "P3",
+                    "Variable" => "P3"
+                ];
+
                 $jiraIssueType = "Story";
-                $jiraSummary = "Convert " . explode("\\", $truncatedDataId)[4] . " to MFTF";
+//                $testName = explode("\\", $truncatedDataId)[4];
+//                if (!$this->endsWith($testName, "Test")) {
+//                    $testName = explode("\\", $truncatedDataId)[5];
+//                }
+                preg_match("/\w+Test/", $truncatedDataId, $matches);
+                $testName = $matches[0];
+                $jiraSummary = "Convert " . $testName . " to MFTF";
                 $jiraComponents = "Module/ " . $moduleName;
-                $jiraPriority = "P1"; // todo: needs to come from a mapping from wiki page
-                $jiraLabels = "S0 mtf-to-mftf"; // todo: comes from variation <data name="tag" xsi:type="string">severity:S2</data>
+                $jiraPriority = $moduleToPriorityMap[$moduleName];
+
+                if (defined(get_class($this) . "::SEVERITY")) {
+                    $jiraSeverity = $this::SEVERITY;
+                } elseif (defined(get_class($this) . "::MVP") && $this::MVP == "yes") {
+                    $jiraSeverity = "S1";
+                } else {
+                    $jiraSeverity = "S3";
+                }
+
+                $jiraLabels = $jiraSeverity . " mtf-to-mftf";
+
+                $out = fopen('php://output', 'w');
+                fputcsv($out, array($jiraIssueType, $jiraSummary, $jiraComponents, $jiraPriority, $jiraLabels));
+                fclose($out);
+
+
+
 
 
 

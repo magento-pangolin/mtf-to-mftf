@@ -29,6 +29,8 @@ use Magento\Store\Test\Fixture\Website;
  */
 class ExportAdvancedPricingTest extends Injectable
 {
+    const MVP = "yes";
+
     /**
      * Test step factory.
      *
