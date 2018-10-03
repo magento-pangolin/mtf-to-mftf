@@ -181,11 +181,17 @@ abstract class Injectable extends Functional
                 $driver = $this->getObjectManager()->get('Magento\Mtf\Driver');
                 $driver->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator($variationName, $moduleName, $title, $testCaseId);
 
-                $this->executeTestVariation($result, $variation);
+// commented out to make room for CSV output instead
+//                $this->executeTestVariation($result, $variation);
+//
+//                // Generate after test run to dump the resulting xml to the filesystem
+//                $driver->MFTF_TEST_GENERATOR->generateTest();
 
-                // Generate after test run to dump the resulting xml to the filesystem
-                $driver->MFTF_TEST_GENERATOR->generateTest();
-
+                $jiraIssueType = "Story";
+                $jiraSummary = "Convert " . explode("\\", $truncatedDataId)[4] . " to MFTF";
+                $jiraComponents = "Module/ " . $moduleName;
+                $jiraPriority = "P1"; // todo: needs to come from a mapping from wiki page
+                $jiraLabels = "S0 mtf-to-mftf"; // todo: comes from variation <data name="tag" xsi:type="string">severity:S2</data>
 
 
 
