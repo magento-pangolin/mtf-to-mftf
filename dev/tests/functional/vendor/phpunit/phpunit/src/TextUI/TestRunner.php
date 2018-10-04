@@ -669,8 +669,6 @@ class TestRunner extends BaseTestRunner
         }
         $suite->run($result);
 
-        // $suite -> $tests[0] -> $tests[330] -> $tests[0] ->
-
         unset($suite);
         $result->flushListeners();
 
