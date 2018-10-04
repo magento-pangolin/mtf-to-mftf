@@ -543,6 +543,130 @@ class TestRunner extends BaseTestRunner
             $suite->setRunTestInSeparateProcess($arguments['processIsolation']);
         }
 
+
+
+        $moduleToPriorityMap = [
+            "AdvancedCheckout" => "P1",
+            "AdvancedPricingImportExport" => "P1",
+            "Analytics" => "P1",
+            "Authorizenet" => "P1",
+            "Braintree" => "P1",
+            "Catalog" => "P1",
+            "CatalogImportExport" => "P1",
+            "CatalogRule" => "P1",
+            "CatalogRuleConfigurable" => "P1",
+            "CatalogSearch" => "P1",
+            "CatalogStaging" => "P1",
+            "CatalogUrlRewrite" => "P1",
+            "Checkout" => "P1",
+            "Cms" => "P1",
+            "Company" => "P1",
+            "CompanyCredit" => "P1",
+            "Config" => "P1",
+            "ConfigurableProduct" => "P1",
+            "Customer" => "P1",
+            "Cybersource" => "P1",
+            "Eway" => "P1",
+            "ImportExport" => "P1",
+            "Indexer" => "P1",
+            "LayeredNavigation" => "P1",
+            "NegotiableQuote" => "P1",
+            "NegotiableQuoteSharedCatalog" => "P1",
+            "PageCache" => "P1",
+            "Payment" => "P1",
+            "Paypal" => "P1",
+            "QuickOrder" => "P1",
+            "Sales" => "P1",
+            "SalesRule" => "P1",
+            "Search" => "P1",
+            "Security" => "P1",
+            "Setup" => "P1",
+            "SharedCatalog" => "P1",
+            "Shipping" => "P1",
+            "Store" => "P1",
+            "Swatches" => "P1",
+            "TargetRule" => "P1",
+            "Tax" => "P1",
+            "Ui" => "P1",
+            "UrlRewrite" => "P1",
+            "VisualMerchandiser" => "P1",
+            "Worldpay" => "P1",
+            "Backend" => "P2",
+            "Banner" => "P2",
+            "Bundle" => "P2",
+            "Captcha" => "P2",
+            "CatalogPermissions" => "P2",
+            "CompanyPayment" => "P2",
+            "CurrencySymbol" => "P2",
+            "CustomerBalance" => "P2",
+            "CustomerCustomAttributes" => "P2",
+            "CustomerFinance" => "P2",
+            "CustomerImportExport" => "P2",
+            "CustomerSegment" => "P2",
+            "Email" => "P2",
+            "GiftWrapping" => "P2",
+            "GoogleTagManager" => "P2",
+            "GroupedProduct" => "P2",
+            "Integration" => "P2",
+            "Logging" => "P2",
+            "Persistent" => "P2",
+            "ProductVideo" => "P2",
+            "Reports" => "P2",
+            "RequisitionList" => "P2",
+            "Review" => "P2",
+            "Reward" => "P2",
+            "Rma" => "P2",
+            "SampleData" => "P2",
+            "Signifyd" => "P2",
+            "Sitemap" => "P2",
+            "Support" => "P2",
+            "User" => "P2",
+            "Vault" => "P2",
+            "VersionsCms" => "P2",
+            "Weee" => "P2",
+            "Widget" => "P2",
+            "Wishlist" => "P2",
+            "CatalogEvent" => "P3",
+            "CheckoutAgreements" => "P3",
+            "Directory" => "P3",
+            "Downloadable" => "P3",
+            "GiftCard" => "P3",
+            "GiftCardAccount" => "P3",
+            "GiftMessage" => "P3",
+            "GiftRegistry" => "P3",
+            "Invitation" => "P3",
+            "Msrp" => "P3",
+            "MultipleWishlist" => "P3",
+            "Newsletter" => "P3",
+            "Reminder" => "P3",
+            "SalesArchive" => "P3",
+            "Swagger" => "P3",
+            "Variable" => "P3",
+            "Install" => "P4"
+        ];
+
+        $allTests = $suite->tests[0]->tests;
+
+        forEach($allTests as $test) {
+            $jiraIssueType = "Story";
+            $testName = substr(strrchr($test->getName(), "\\"), 1);
+            $jiraSummary = "Convert " . $testName . " to MFTF";
+            list($_, $moduleName) = explode("\\", $test->getName());
+            $jiraComponents = "Module/ " . $moduleName;
+            $jiraPriority = $moduleToPriorityMap[$moduleName];
+
+            if (defined(get_class($test->tests[0]) . "::SEVERITY")) {
+                $severity = $test->tests[0]::SEVERITY;
+            } elseif (defined(get_class($test->tests[0]) . "::MVP") && $test->tests[0]::MVP == "yes") {
+                $severity = "S1";
+            } else {
+                $severity = "S3";
+            }
+            $jiraLabels = "mtf-to-mftf " . $severity;
+            $jiraDescription = $test->getName();
+
+            echo $jiraIssueType . "," . $jiraSummary . "," . $jiraComponents . "," . $jiraPriority . "," . $jiraLabels . "," . $jiraDescription . PHP_EOL;
+        }
         $suite->run($result);
 
         // $suite -> $tests[0] -> $tests[330] -> $tests[0] ->
