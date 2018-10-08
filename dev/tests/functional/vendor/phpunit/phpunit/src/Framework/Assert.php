@@ -632,6 +632,13 @@ abstract class Assert
             )
         );
 
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertNotEquals message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $expected . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $actual . '</actualResult>');
+        $generator->addAction("</assertNotEquals>");
+
         static::assertThat($actual, $constraint, $message);
     }
 

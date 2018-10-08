@@ -166,24 +166,28 @@ abstract class Injectable extends Functional
 
 
 
-                // GATHER SOME DATA
+                // get variation name e.g. CreateTaxRateEntityTestVariation1
                 $variationName = explode("_", $this->getVariationName())[0];
+
+                // get Magento module name e.g. Tax
                 list($_, $moduleName) = explode("\\", $this->dataId);
-                $data = $this->objectManager->get('Magento\Mtf\Variation\Config\Data');
-                $truncatedDataId = str_replace("::test", "", $this->dataId);
-                $truncatedDataId = str_replace("::", "", $truncatedDataId);
-                $testCaseData = $data->get('testCase')[$truncatedDataId];
+
+                // get title and testCaseId
+                $allTestCaseData = $this->objectManager->get('Magento\Mtf\Variation\Config\Data')->get('testCase');
+                $testPath = strstr($this->dataId, "::", true);
+                $testCaseData = $allTestCaseData[$testPath];
                 $variationData = $testCaseData["variation"][$variationName];
                 $title = $variationData["summary"] ?? $testCaseData["summary"] ?? "";
                 $testCaseId = $variationData["ticketId"] ?? $testCaseData["ticketId"] ?? "";
 
-                // new MftfTestGenerator is instantiated per variation
+                // new generator instance per iteration
                 $driver = $this->getObjectManager()->get('Magento\Mtf\Driver');
                 $driver->MFTF_TEST_GENERATOR = new \Magento\Mtf\MftfGenerator($variationName, $moduleName, $title, $testCaseId);
 
+                // run the variation, recording along the way
                 $this->executeTestVariation($result, $variation);
 
-                // Generate after test run to dump the resulting xml to the filesystem
+                // generate after test run to dump the resulting xml to the filesystem
                 $driver->MFTF_TEST_GENERATOR->generateTest();
 
 

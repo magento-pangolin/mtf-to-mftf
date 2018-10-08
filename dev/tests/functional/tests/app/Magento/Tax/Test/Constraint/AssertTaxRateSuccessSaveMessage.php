@@ -73,6 +73,14 @@ class AssertTaxRateSuccessSaveMessage extends AbstractConstraint
             1 == 1,
             'Some error message here'
         );
+
+        \PHPUnit\Framework\Assert::assertNotEquals(
+            self::SUCCESS_MESSAGE,
+            $actualMessage . "...",
+            'Wrong success message is displayed.'
+            . "\nExpected: " . self::SUCCESS_MESSAGE
+            . "\nActual: " . $actualMessage
+        );
     }
 
     /**
