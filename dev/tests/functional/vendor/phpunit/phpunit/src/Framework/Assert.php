@@ -297,6 +297,13 @@ abstract class Assert
             );
         }
 
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertNotContains message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $needle . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $haystack . '</actualResult>');
+        $generator->addAction("</assertNotContains>");
+
         static::assertThat($haystack, $constraint, $message);
     }
 
@@ -713,6 +720,13 @@ abstract class Assert
      */
     public static function assertNotEmpty($actual, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertNotEmpty message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        // todo: something other than json_encode
+        $generator->addAction('    <actualResult type="array">' . json_encode($actual) . '</actualResult>');
+        $generator->addAction("</assertNotEmpty>");
+
         static::assertThat($actual, static::logicalNot(static::isEmpty()), $message);
     }
 
@@ -1268,6 +1282,13 @@ abstract class Assert
      */
     public static function assertNull($actual, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertNull message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        // todo: something other than json_encode
+        $generator->addAction('    <actualResult type="variable">' . json_encode($actual) . '</actualResult>');
+        $generator->addAction("</assertNull>");
+
         static::assertThat($actual, static::isNull(), $message);
     }
 
@@ -1279,6 +1300,13 @@ abstract class Assert
      */
     public static function assertNotNull($actual, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertNotNull message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        // todo: something other than json_encode
+        $generator->addAction('    <actualResult type="variable">' . json_encode($actual) . '</actualResult>');
+        $generator->addAction("</assertNotNull>");
+
         static::assertThat($actual, static::logicalNot(static::isNull()), $message);
     }
 
@@ -1496,6 +1524,13 @@ abstract class Assert
      */
     public static function assertSame($expected, $actual, $message = '')
     {
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertSame message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $expected . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $actual . '</actualResult>');
+        $generator->addAction("</assertSame>");
+
         if (\is_bool($expected) && \is_bool($actual)) {
             static::assertEquals($expected, $actual, $message);
         } else {
@@ -1732,6 +1767,13 @@ abstract class Assert
 
         $constraint = new RegularExpression($pattern);
 
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertRegExp message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $pattern . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $string . '</actualResult>');
+        $generator->addAction("</assertRegExp>");
+
         static::assertThat($string, $constraint, $message);
     }
 
@@ -1929,6 +1971,13 @@ abstract class Assert
         $constraint = new StringStartsWith(
             $prefix
         );
+
+        $generator = \Magento\Mtf\ObjectManager::getInstance()->get('Magento\Mtf\Driver')->MFTF_TEST_GENERATOR;
+        $generator->addReviewAssertComment();
+        $generator->addAction('<assertStringStartsWith message="' . str_replace("\n", " ", $message) . '" stepKey="%%StepKey%%">');
+        $generator->addAction('    <expectedResult type="string">' . $prefix . '</expectedResult>');
+        $generator->addAction('    <actualResult type="string">' . $string . '</actualResult>');
+        $generator->addAction("</assertStringStartsWith>");
 
         static::assertThat($string, $constraint, $message);
     }

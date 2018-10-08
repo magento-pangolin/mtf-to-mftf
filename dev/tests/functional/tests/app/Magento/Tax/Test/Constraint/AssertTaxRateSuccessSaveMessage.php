@@ -81,6 +81,45 @@ class AssertTaxRateSuccessSaveMessage extends AbstractConstraint
             . "\nExpected: " . self::SUCCESS_MESSAGE
             . "\nActual: " . $actualMessage
         );
+
+        \PHPUnit\Framework\Assert::assertNotContains(
+            "hello",
+            "dogdogDOGdogcatdogdogDOGdog",
+            'Wrong content is displayed.'
+        );
+
+        \PHPUnit\Framework\Assert::assertNotEmpty(
+            array(1, 2, 3),
+            'Array is empty'
+        );
+
+        \PHPUnit\Framework\Assert::assertNull(
+            null,
+            'Expected null'
+        );
+
+        \PHPUnit\Framework\Assert::assertNotNull(
+            42,
+            'Expected not null value'
+        );
+
+        \PHPUnit\Framework\Assert::assertRegExp(
+            "/Hello (\d+) world\./",
+            "Hello 1 world.",
+            "Expected regexp match"
+        );
+
+        \PHPUnit\Framework\Assert::assertSame(
+            123,
+            123,
+            "assertSame failed"
+        );
+
+        \PHPUnit\Framework\Assert::assertStringStartsWith(
+            "Hello",
+            "Hello world!",
+            "assertStringStartsWith failed"
+        );
     }
 
     /**
